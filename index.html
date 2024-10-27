@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignmetn-09</title>
+
+    <style>
+        body {
+            background: black;
+        }
+
+        .main>button {
+            font-size: 30px;
+        }
+
+        .main>.start {
+            margin-left: 720px;
+            margin-top: 50px;
+        }
+
+        .main>section {
+            width: 1100px;
+            height: 100px;
+            border: 2px solid red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            /*margin-top: 300px;*/
+            margin-left: 250px;
+        }
+
+        .main>section>div {
+            width: 150px;
+            height: 80px;
+            border-radius: 10px;
+            border: 1px solid white;
+        }
+
+        .main>h1 {
+            color: coral;
+            font-size: 3rem;
+            margin-top: 250px;
+            margin-left: 550px;
+        }
+    </style>
+</head>
+<body>
+<section class="main">
+    <h1>JavaScript Knight Rider</h1>
+    <section>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </section>
+
+    <button type="button" class="start" id="start">Start</button>
+    <button type="button" class="stop" id="stop">Stop</button>
+</section>
+
+<script src="lib/jquery-3.7.1.min.js"></script>
+<script>
+    const light_count = 6;
+    let current_light = -1;
+    let direction = "RIGHT"; //"RIGHT", "LEFT"
+    interval_id = null;
+
+    update_light = () => {
+        if (direction === "RIGHT"){
+            current_light++;
+            $(".light").css("background", "white");
+            $(".light").eq(current_light).css("background", "maroon");
+            $(".light").eq(current_light-1).css("background", "lightpink");
+
+            if (current_light === light_count-1) {
+                direction = "LEFT";
+            }
+
+        }else {
+            current_light--;
+            $(".light").css("background", "white");
+            $(".light").eq(current_light).css("background", "maroon");
+            $(".light").eq(current_light+1).css("background", "lightpink");
+
+            if (current_light === 0) {
+                direction = "RIGHT";
+            }
+        }
+    }
+
+    ;
+
+    $('#start').on('click', function () {
+        interval_id = setInterval(update_light, 100);
+    });
+
+    $('#stop').on('click', function () {
+        clearInterval(interval_id);
+    });
+
+</script>
+</body>
+</html>
